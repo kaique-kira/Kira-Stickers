@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -8,8 +10,6 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        System.out.println("Alooha");
 
         //Abrir uma conexão HTTP com o IMDb
         String url ="https://mocki.io/v1/9a7c1ca9-29b4-4eb3-8306-1adb9d159060";
@@ -27,10 +27,16 @@ public class App {
 
         //Exibir e manipular os dados
         for (Map<String, String> filme : listaDeFilmes) {
-            System.out.println(filme.get("fullTitle"));
-            System.out.println(filme.get("image"));
-            System.out.println(filme.get("imDbRating"));
-            
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("fullTitle");
+            InputStream inputStream = new URL(urlImagem).openStream();
+
+            String nomeArquivo = titulo + ".png" ;
+
+            var geradora = new GeradorDeFigurinhas();
+            geradora.cria(inputStream, nomeArquivo);
+
+            System.out.println(titulo);
         }
 
 
