@@ -35,7 +35,7 @@ public class GeradorDeFigurinhas {
         graphics.drawString("Morreu enquanto lia", 10, novaAltura -250);
 
         //escrever a imagem nova em um arquivo
-        ImageIO.write(novaImagem, "png", new File("imagens/", nomeArquivo));
+        ImageIO.write(novaImagem, "png", new File(nomeArquivo));
         
     }
     
